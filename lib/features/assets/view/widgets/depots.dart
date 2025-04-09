@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supa_liquid/core/models/address/address.dart';
 import 'package:supa_liquid/core/models/assets/assets.dart';
 import 'package:supa_liquid/core/util/extensions/extensions.dart';
+import 'package:supa_liquid/features/assets/controller/assets_bloc/assets_bloc.dart';
 import 'package:supa_liquid/features/assets/data/assets_repository.dart';
 
 import '../../../../core/models/value_object/value_object.dart';
@@ -65,46 +67,42 @@ class _Depots extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final labels = context.localizationLabels;
-    return StreamBuilder<List<Asset>>(
-      stream: Stream.value([]),
-      builder: (context, snapshot) {
-        return !snapshot.hasData
-            ? const CommonLoading()
-            : snapshot.hasError
-            ? Text(labels.unknownError)
-            : Column(
-              children: [
-                if (snapshot.data!.isEmpty) Text(labels.noDepotsToDisplay),
-                ...snapshot.data!.whereType<Depot>().map(
-                  (depot) => ListTile(
-                    title: Text(depot.name.getOrCrash),
-                    subtitle: Text(depot.address.formattedAddress.getOrCrash),
-                    onTap: () async {
-                      shortFormModal(
-                        title: labels.editDepot,
-                        inputs: [
-                          Input.vstring(depot.name, labelText: labels.name),
-                          Input.address(
-                            depot.address,
-                            labelText: labels.address,
-                          ),
-                        ],
-                        submitHook: (inputs) async {
-                          // await sl<AssetsRepository>().createDepot(depot);
-                          // await sl<Repository>().edit(
-                          //   Entities.asset,
-                          //   depot.copyWith(
-                          //     name: inputs[0].value as VString,
-                          //     address: inputs[1].value as Address,
-                          //   ),
-                          // );
-                        },
-                      ).show();
+
+    return BlocBuilder<AssetsBloc, AssetsState>(
+      builder: (context, state) {
+        return Column(
+          children: [
+            if (state.depots.isEmpty) Text(labels.noDepotsToDisplay),
+            ...state.depots.map(
+              (depot) => ListTile(
+                title: Text(depot.name.getOrCrash),
+                // subtitle: Text(depot.address.formattedAddress.getOrCrash),
+                onTap: () async {
+                  shortFormModal(
+                    title: labels.editDepot,
+                    inputs: [
+                      Input.vstring(depot.name, labelText: labels.name),
+                      // Input.address(
+                      //   depot.address,
+                      //   labelText: labels.address,
+                      // ),
+                    ],
+                    submitHook: (inputs) async {
+                      // await sl<AssetsRepository>().createDepot(depot);
+                      // await sl<Repository>().edit(
+                      //   Entities.asset,
+                      //   depot.copyWith(
+                      //     name: inputs[0].value as VString,
+                      //     address: inputs[1].value as Address,
+                      //   ),
+                      // );
                     },
-                  ),
-                ),
-              ],
-            );
+                  ).show();
+                },
+              ),
+            ),
+          ],
+        );
       },
     );
   }

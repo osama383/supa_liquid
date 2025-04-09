@@ -60,14 +60,14 @@ extension TripStatusMapperExtension on TripStatus {
   }
 }
 
-class ServiceGreaseMapper extends ClassMapperBase<ServiceGrease> {
+class ServiceGreaseMapper extends SubClassMapperBase<ServiceGrease> {
   ServiceGreaseMapper._();
 
   static ServiceGreaseMapper? _instance;
   static ServiceGreaseMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ServiceGreaseMapper._());
-      TaskMapper.ensureInitialized();
+      TaskMapper.ensureInitialized().addSubMapper(_instance!);
       TaskStatusMapper.ensureInitialized();
     }
     return _instance!;
@@ -88,6 +88,13 @@ class ServiceGreaseMapper extends ClassMapperBase<ServiceGrease> {
     #status: _f$status,
     #capacity: _f$capacity,
   };
+
+  @override
+  final String discriminatorKey = 'type';
+  @override
+  final dynamic discriminatorValue = 'ServiceGrease';
+  @override
+  late final ClassMapperBase superMapper = TaskMapper.ensureInitialized();
 
   static ServiceGrease _instantiate(DecodingData data) {
     return ServiceGrease(
@@ -195,7 +202,8 @@ class WaypointMapper extends ClassMapperBase<Waypoint> {
   static String _$id(Waypoint v) => v.id;
   static const Field<Waypoint, String> _f$id = Field('id', _$id);
   static String _$tripId(Waypoint v) => v.tripId;
-  static const Field<Waypoint, String> _f$tripId = Field('tripId', _$tripId);
+  static const Field<Waypoint, String> _f$tripId =
+      Field('tripId', _$tripId, key: r'trip_id');
   static Customer _$customer(Waypoint v) => v.customer;
   static const Field<Waypoint, Customer> _f$customer =
       Field('customer', _$customer, hook: NullToMapHook());

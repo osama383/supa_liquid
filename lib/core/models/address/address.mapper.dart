@@ -22,7 +22,7 @@ class AddressMapper extends ClassMapperBase<Address> {
 
   static VString _$formattedAddress(Address v) => v.formattedAddress;
   static const Field<Address, VString> _f$formattedAddress =
-      Field('formattedAddress', _$formattedAddress);
+      Field('formattedAddress', _$formattedAddress, key: r'formatted_address');
   static LatLng _$location(Address v) => v.location;
   static const Field<Address, LatLng> _f$location =
       Field('location', _$location);

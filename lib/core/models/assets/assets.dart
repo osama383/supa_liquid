@@ -1,7 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:supa_liquid/core/models/firestore_document.dart';
 
-import '../address/address.dart';
 import '../real_number.dart';
 import '../value_object/value_object.dart';
 import '../volume/volume.dart';

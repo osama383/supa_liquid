@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:supa_liquid/core/repository.dart';
+import 'package:supa_liquid/features/assets/data/assets_repository.dart';
 
 import '../../../../core/models/assets/assets.dart';
 import '../../../../core/models/failure/failure.dart';
@@ -11,10 +12,15 @@ part 'assets_state.dart';
 part 'assets_bloc.freezed.dart';
 
 class AssetsBloc extends Bloc<AssetsEvent, AssetsState> {
-  AssetsBloc(Repository repository) : super(AssetsState.initial()) {
+  AssetsBloc(AssetsRepository assetsRepo) : super(AssetsState.initial()) {
     on<AssetsEvent>((event, emit) async {
       await event.map(
         started: (event) async {
+          final result = await assetsRepo.fetchDepots();
+          result.fold((_) {}, (depots) {
+            emit(state.copyWith(depots: depots));
+          });
+
           // repository.list<Asset>(Entities.asset).listen((assets) {
           // emit(state.copyWith(
           //     vehiclesOrFailureOption:

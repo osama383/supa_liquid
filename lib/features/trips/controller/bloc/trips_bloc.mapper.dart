@@ -25,7 +25,7 @@ class TripsStateMapper extends ClassMapperBase<TripsState> {
   static const Field<TripsState, List<Trip>> _f$trips = Field('trips', _$trips);
   static bool _$isLoading(TripsState v) => v.isLoading;
   static const Field<TripsState, bool> _f$isLoading =
-      Field('isLoading', _$isLoading);
+      Field('isLoading', _$isLoading, key: r'is_loading');
 
   @override
   final MappableFields<TripsState> fields = const {

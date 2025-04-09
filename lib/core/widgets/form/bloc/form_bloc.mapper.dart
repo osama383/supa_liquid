@@ -25,17 +25,18 @@ class FormStateMapper extends ClassMapperBase<FormState> {
       Field('inputs', _$inputs);
   static bool _$isEditing(FormState v) => v.isEditing;
   static const Field<FormState, bool> _f$isEditing =
-      Field('isEditing', _$isEditing);
+      Field('isEditing', _$isEditing, key: r'is_editing');
   static bool _$showErrors(FormState v) => v.showErrors;
   static const Field<FormState, bool> _f$showErrors =
-      Field('showErrors', _$showErrors);
+      Field('showErrors', _$showErrors, key: r'show_errors');
   static bool _$submissionInProgress(FormState v) => v.submissionInProgress;
-  static const Field<FormState, bool> _f$submissionInProgress =
-      Field('submissionInProgress', _$submissionInProgress);
+  static const Field<FormState, bool> _f$submissionInProgress = Field(
+      'submissionInProgress', _$submissionInProgress,
+      key: r'submission_in_progress');
   static Option<Either<Failure, Unit>> _$resultOption(FormState v) =>
       v.resultOption;
   static const Field<FormState, Option<Either<Failure, Unit>>> _f$resultOption =
-      Field('resultOption', _$resultOption);
+      Field('resultOption', _$resultOption, key: r'result_option');
 
   @override
   final MappableFields<FormState> fields = const {

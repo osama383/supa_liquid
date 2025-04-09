@@ -32,10 +32,10 @@ class CustomerMapper extends ClassMapperBase<Customer> {
       Field('address', _$address);
   static Utc _$createdDate(Customer v) => v.createdDate;
   static const Field<Customer, Utc> _f$createdDate =
-      Field('createdDate', _$createdDate);
+      Field('createdDate', _$createdDate, key: r'created_date');
   static String _$locationNotes(Customer v) => v.locationNotes;
   static const Field<Customer, String> _f$locationNotes =
-      Field('locationNotes', _$locationNotes);
+      Field('locationNotes', _$locationNotes, key: r'location_notes');
   static Set<Product> _$products(Customer v) => v.products;
   static const Field<Customer, Set<Product>> _f$products =
       Field('products', _$products);

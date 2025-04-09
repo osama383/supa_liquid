@@ -23,9 +23,7 @@ class AssetsRepository {
     return right(DepotMapper.fromMap(response));
   }
 
-  Future<Either<Failure, List<Depot>>> fetchDepots({
-    required String name,
-  }) async {
+  Future<Either<Failure, List<Depot>>> fetchDepots() async {
     final response = await supabase.client
         .from('depot')
         .select('id, name, company(id)');

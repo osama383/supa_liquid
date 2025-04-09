@@ -29,7 +29,7 @@ class SIMapper extends EnumMapper<SI> {
         return SI.metric;
       case r'imperial':
         return SI.imperial;
-      case r'imperialUS':
+      case r'imperial_us':
         return SI.imperialUS;
       default:
         throw MapperException.unknownEnumValue(value);
@@ -44,7 +44,7 @@ class SIMapper extends EnumMapper<SI> {
       case SI.imperial:
         return r'imperial';
       case SI.imperialUS:
-        return r'imperialUS';
+        return r'imperial_us';
     }
   }
 }

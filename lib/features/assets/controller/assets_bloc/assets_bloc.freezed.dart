@@ -563,8 +563,7 @@ abstract class _FetchContainers implements AssetsEvent {
 
 /// @nodoc
 mixin _$AssetsState {
-  Option<Either<Failure, List<Depot>>> get depotsOrFailureOption =>
-      throw _privateConstructorUsedError;
+  List<Depot> get depots => throw _privateConstructorUsedError;
   Option<Either<Failure, List<Vehicle>>> get vehiclesOrFailureOption =>
       throw _privateConstructorUsedError;
   Option<Either<Failure, List<Container>>> get containersOrFailureOption =>
@@ -585,7 +584,7 @@ abstract class $AssetsStateCopyWith<$Res> {
   ) = _$AssetsStateCopyWithImpl<$Res, AssetsState>;
   @useResult
   $Res call({
-    Option<Either<Failure, List<Depot>>> depotsOrFailureOption,
+    List<Depot> depots,
     Option<Either<Failure, List<Vehicle>>> vehiclesOrFailureOption,
     Option<Either<Failure, List<Container>>> containersOrFailureOption,
   });
@@ -606,17 +605,17 @@ class _$AssetsStateCopyWithImpl<$Res, $Val extends AssetsState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? depotsOrFailureOption = null,
+    Object? depots = null,
     Object? vehiclesOrFailureOption = null,
     Object? containersOrFailureOption = null,
   }) {
     return _then(
       _value.copyWith(
-            depotsOrFailureOption:
-                null == depotsOrFailureOption
-                    ? _value.depotsOrFailureOption
-                    : depotsOrFailureOption // ignore: cast_nullable_to_non_nullable
-                        as Option<Either<Failure, List<Depot>>>,
+            depots:
+                null == depots
+                    ? _value.depots
+                    : depots // ignore: cast_nullable_to_non_nullable
+                        as List<Depot>,
             vehiclesOrFailureOption:
                 null == vehiclesOrFailureOption
                     ? _value.vehiclesOrFailureOption
@@ -643,7 +642,7 @@ abstract class _$$AssetsStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    Option<Either<Failure, List<Depot>>> depotsOrFailureOption,
+    List<Depot> depots,
     Option<Either<Failure, List<Vehicle>>> vehiclesOrFailureOption,
     Option<Either<Failure, List<Container>>> containersOrFailureOption,
   });
@@ -663,17 +662,17 @@ class __$$AssetsStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? depotsOrFailureOption = null,
+    Object? depots = null,
     Object? vehiclesOrFailureOption = null,
     Object? containersOrFailureOption = null,
   }) {
     return _then(
       _$AssetsStateImpl(
-        depotsOrFailureOption:
-            null == depotsOrFailureOption
-                ? _value.depotsOrFailureOption
-                : depotsOrFailureOption // ignore: cast_nullable_to_non_nullable
-                    as Option<Either<Failure, List<Depot>>>,
+        depots:
+            null == depots
+                ? _value._depots
+                : depots // ignore: cast_nullable_to_non_nullable
+                    as List<Depot>,
         vehiclesOrFailureOption:
             null == vehiclesOrFailureOption
                 ? _value.vehiclesOrFailureOption
@@ -693,13 +692,19 @@ class __$$AssetsStateImplCopyWithImpl<$Res>
 
 class _$AssetsStateImpl implements _AssetsState {
   const _$AssetsStateImpl({
-    required this.depotsOrFailureOption,
+    required final List<Depot> depots,
     required this.vehiclesOrFailureOption,
     required this.containersOrFailureOption,
-  });
+  }) : _depots = depots;
 
+  final List<Depot> _depots;
   @override
-  final Option<Either<Failure, List<Depot>>> depotsOrFailureOption;
+  List<Depot> get depots {
+    if (_depots is EqualUnmodifiableListView) return _depots;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_depots);
+  }
+
   @override
   final Option<Either<Failure, List<Vehicle>>> vehiclesOrFailureOption;
   @override
@@ -707,7 +712,7 @@ class _$AssetsStateImpl implements _AssetsState {
 
   @override
   String toString() {
-    return 'AssetsState(depotsOrFailureOption: $depotsOrFailureOption, vehiclesOrFailureOption: $vehiclesOrFailureOption, containersOrFailureOption: $containersOrFailureOption)';
+    return 'AssetsState(depots: $depots, vehiclesOrFailureOption: $vehiclesOrFailureOption, containersOrFailureOption: $containersOrFailureOption)';
   }
 
   @override
@@ -715,8 +720,7 @@ class _$AssetsStateImpl implements _AssetsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AssetsStateImpl &&
-            (identical(other.depotsOrFailureOption, depotsOrFailureOption) ||
-                other.depotsOrFailureOption == depotsOrFailureOption) &&
+            const DeepCollectionEquality().equals(other._depots, _depots) &&
             (identical(
                   other.vehiclesOrFailureOption,
                   vehiclesOrFailureOption,
@@ -732,7 +736,7 @@ class _$AssetsStateImpl implements _AssetsState {
   @override
   int get hashCode => Object.hash(
     runtimeType,
-    depotsOrFailureOption,
+    const DeepCollectionEquality().hash(_depots),
     vehiclesOrFailureOption,
     containersOrFailureOption,
   );
@@ -748,7 +752,7 @@ class _$AssetsStateImpl implements _AssetsState {
 
 abstract class _AssetsState implements AssetsState {
   const factory _AssetsState({
-    required final Option<Either<Failure, List<Depot>>> depotsOrFailureOption,
+    required final List<Depot> depots,
     required final Option<Either<Failure, List<Vehicle>>>
     vehiclesOrFailureOption,
     required final Option<Either<Failure, List<Container>>>
@@ -756,7 +760,7 @@ abstract class _AssetsState implements AssetsState {
   }) = _$AssetsStateImpl;
 
   @override
-  Option<Either<Failure, List<Depot>>> get depotsOrFailureOption;
+  List<Depot> get depots;
   @override
   Option<Either<Failure, List<Vehicle>>> get vehiclesOrFailureOption;
   @override

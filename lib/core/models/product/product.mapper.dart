@@ -28,17 +28,20 @@ class ProductMapper extends ClassMapperBase<Product> {
       Field('status', _$status);
   static UtcOption _$dueDateOption(Product v) => v.dueDateOption;
   static const Field<Product, UtcOption> _f$dueDateOption =
-      Field('dueDateOption', _$dueDateOption);
+      Field('dueDateOption', _$dueDateOption, key: r'due_date_option');
   static UtcOption _$lastServiceOption(Product v) => v.lastServiceOption;
-  static const Field<Product, UtcOption> _f$lastServiceOption =
-      Field('lastServiceOption', _$lastServiceOption);
+  static const Field<Product, UtcOption> _f$lastServiceOption = Field(
+      'lastServiceOption', _$lastServiceOption,
+      key: r'last_service_option');
   static UtcOption _$scheduledDateOption(Product v) => v.scheduledDateOption;
-  static const Field<Product, UtcOption> _f$scheduledDateOption =
-      Field('scheduledDateOption', _$scheduledDateOption);
+  static const Field<Product, UtcOption> _f$scheduledDateOption = Field(
+      'scheduledDateOption', _$scheduledDateOption,
+      key: r'scheduled_date_option');
   static Set<EmailAddress> _$serviceNotificationEmails(Product v) =>
       v.serviceNotificationEmails;
   static const Field<Product, Set<EmailAddress>> _f$serviceNotificationEmails =
-      Field('serviceNotificationEmails', _$serviceNotificationEmails);
+      Field('serviceNotificationEmails', _$serviceNotificationEmails,
+          key: r'service_notification_emails');
   static LatLng _$location(Product v) => v.location;
   static const Field<Product, LatLng> _f$location =
       Field('location', _$location);
@@ -108,21 +111,25 @@ class UcoMapper extends SubClassMapperBase<Uco> {
   static const Field<Uco, ServiceStatus> _f$status = Field('status', _$status);
   static UtcOption _$dueDateOption(Uco v) => v.dueDateOption;
   static const Field<Uco, UtcOption> _f$dueDateOption =
-      Field('dueDateOption', _$dueDateOption);
+      Field('dueDateOption', _$dueDateOption, key: r'due_date_option');
   static UtcOption _$lastServiceOption(Uco v) => v.lastServiceOption;
-  static const Field<Uco, UtcOption> _f$lastServiceOption =
-      Field('lastServiceOption', _$lastServiceOption);
+  static const Field<Uco, UtcOption> _f$lastServiceOption = Field(
+      'lastServiceOption', _$lastServiceOption,
+      key: r'last_service_option');
   static UtcOption _$scheduledDateOption(Uco v) => v.scheduledDateOption;
-  static const Field<Uco, UtcOption> _f$scheduledDateOption =
-      Field('scheduledDateOption', _$scheduledDateOption);
+  static const Field<Uco, UtcOption> _f$scheduledDateOption = Field(
+      'scheduledDateOption', _$scheduledDateOption,
+      key: r'scheduled_date_option');
   static Set<EmailAddress> _$serviceNotificationEmails(Uco v) =>
       v.serviceNotificationEmails;
   static const Field<Uco, Set<EmailAddress>> _f$serviceNotificationEmails =
-      Field('serviceNotificationEmails', _$serviceNotificationEmails);
+      Field('serviceNotificationEmails', _$serviceNotificationEmails,
+          key: r'service_notification_emails');
   static LatLng _$location(Uco v) => v.location;
   static const Field<Uco, LatLng> _f$location = Field('location', _$location);
   static int _$oilPrice(Uco v) => v.oilPrice;
-  static const Field<Uco, int> _f$oilPrice = Field('oilPrice', _$oilPrice);
+  static const Field<Uco, int> _f$oilPrice =
+      Field('oilPrice', _$oilPrice, key: r'oil_price');
 
   @override
   final MappableFields<Uco> fields = const {
@@ -276,20 +283,23 @@ class GreaseMapper extends SubClassMapperBase<Grease> {
       Field('status', _$status);
   static UtcOption _$dueDateOption(Grease v) => v.dueDateOption;
   static const Field<Grease, UtcOption> _f$dueDateOption =
-      Field('dueDateOption', _$dueDateOption);
+      Field('dueDateOption', _$dueDateOption, key: r'due_date_option');
   static UtcOption _$lastServiceOption(Grease v) => v.lastServiceOption;
-  static const Field<Grease, UtcOption> _f$lastServiceOption =
-      Field('lastServiceOption', _$lastServiceOption);
+  static const Field<Grease, UtcOption> _f$lastServiceOption = Field(
+      'lastServiceOption', _$lastServiceOption,
+      key: r'last_service_option');
   static UtcOption _$scheduledDateOption(Grease v) => v.scheduledDateOption;
-  static const Field<Grease, UtcOption> _f$scheduledDateOption =
-      Field('scheduledDateOption', _$scheduledDateOption);
+  static const Field<Grease, UtcOption> _f$scheduledDateOption = Field(
+      'scheduledDateOption', _$scheduledDateOption,
+      key: r'scheduled_date_option');
   static LatLng _$location(Grease v) => v.location;
   static const Field<Grease, LatLng> _f$location =
       Field('location', _$location);
   static Set<EmailAddress> _$serviceNotificationEmails(Grease v) =>
       v.serviceNotificationEmails;
   static const Field<Grease, Set<EmailAddress>> _f$serviceNotificationEmails =
-      Field('serviceNotificationEmails', _$serviceNotificationEmails);
+      Field('serviceNotificationEmails', _$serviceNotificationEmails,
+          key: r'service_notification_emails');
   static Volume _$capacity(Grease v) => v.capacity;
   static const Field<Grease, Volume> _f$capacity =
       Field('capacity', _$capacity);
