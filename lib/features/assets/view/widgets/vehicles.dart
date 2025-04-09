@@ -74,7 +74,7 @@ class _Vehicles extends StatelessWidget {
   Widget build(BuildContext context) {
     final labels = context.localizationLabels;
     return StreamBuilder<List<Asset>>(
-      stream: sl<Repository>().list(Entities.asset),
+      stream: Stream.value([]), //sl<Repository>().list(Entities.asset),
       builder: (context, snapshot) {
         return !snapshot.hasData
             ? const CommonLoading()

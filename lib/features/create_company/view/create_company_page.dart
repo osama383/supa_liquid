@@ -42,12 +42,8 @@ class CreateCompanyPage extends StatelessWidget {
                             .select()
                             .single();
 
-                    await Supabase.instance.client.from('company_users').insert(
-                      {
-                        'companyId': response['id'],
-                        'userId': sl<Auth>().currentUser!.id,
-                      },
-                    ).select();
+                    sl<Auth>().companyUpdated(CompanyMapper.fromMap(response));
+
                     print(response);
                   } catch (e) {
                     print(e);

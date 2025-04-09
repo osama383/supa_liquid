@@ -28,18 +28,30 @@ class Auth {
   Company get company =>
       _company == null ? throw StateError('company is null') : _company!;
 
-  bool get userHasCompany => false;
+  bool get userHasCompany => _company != null;
 
   final StreamController<User?> _currentUserStreamController =
       StreamController.broadcast();
   late final Stream<User?> currentUserStream;
 
+  final StreamController<Company?> _companyStreamController =
+      StreamController.broadcast();
+  late final Stream<Company?> currentCompanyStream;
+
   Auth(this.supabase) {
     currentUserStream = _currentUserStreamController.stream.asBroadcastStream();
     currentUserStream.listen((user) => _currentUser = user);
+
+    currentCompanyStream = _companyStreamController.stream.asBroadcastStream();
+    currentCompanyStream.listen((company) => _company = company);
   }
 
   Future<void> started() async {
+    // final data = await supabase.client.rpc(
+    //   'fn_substring',
+    //   params: {'_string': 'software', '_start': 5, '_to': 3},
+    // );
+    // print(data);
     final session = supabase.client.auth.currentSession;
     if (session == null) {
       _currentUser = null;
@@ -59,13 +71,32 @@ class Auth {
       return;
     }
     _currentUser = UserMapper.fromMap(result);
+    await _fetchUserCompany();
+    print(_company);
+    _currentUserStreamController.sink.add(_currentUser);
+    _companyStreamController.sink.add(_company);
+  }
 
-    final companyUser = await supabase.client
+  _fetchUserCompany() async {
+    final companyUserMap = await supabase.client
         .from('company_users')
-        .stream(primaryKey: ['userId'])
-        .listen((e) {
-          print(e);
-        });
+        .select()
+        .eq('user_id', _currentUser!.id)
+        .limit(1);
+
+    if (companyUserMap.isEmpty) {
+      _company = null;
+      return;
+    }
+
+    final companyMap =
+        await Supabase.instance.client
+            .from('company')
+            .select()
+            .eq('id', companyUserMap.first['company_id'])
+            .single();
+
+    _company = CompanyMapper.fromMap(companyMap);
   }
 
   Future<Either<Failure, Unit>> signUpWithEmailAndPassword({
@@ -79,9 +110,9 @@ class Auth {
       );
       if (response.session == null) return left(SignupFailure());
 
-      await supabase.client
-          .from('users')
-          .insert(User(id: response.user!.id, email: email).toMap());
+      // await supabase.client
+      //     .from('users')
+      //     .insert(User(id: response.user!.id, email: email).toMap());
 
       final result = await supabase.client
           .from('users')
@@ -93,6 +124,8 @@ class Auth {
       _currentUserStreamController.sink.add(UserMapper.fromMap(result.first));
       return right(unit);
     } catch (e) {
+      print(e);
+
       return left(SignupFailure());
     }
   }
@@ -115,7 +148,10 @@ class Auth {
           .eq('id', response.user!.id);
       if (result.isEmpty) return left(UserNotFound());
 
-      _currentUserStreamController.sink.add(UserMapper.fromMap(result.first));
+      _currentUser = UserMapper.fromMap(result.first);
+      await _fetchUserCompany();
+      _currentUserStreamController.sink.add(_currentUser);
+      _companyStreamController.sink.add(_company);
       return right(unit);
     } catch (e) {
       return left(SigninFailure());
@@ -127,8 +163,13 @@ class Auth {
     _currentUserStreamController.sink.add(user);
   }
 
+  void companyUpdated(Company company) {
+    _companyStreamController.sink.add(company);
+  }
+
   void logout() {
     _currentUserStreamController.sink.add(null);
+    _companyStreamController.sink.add(null);
     supabase.client.auth.signOut();
   }
 }

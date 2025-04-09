@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:supa_liquid/core/models/address/address.dart';
 import 'package:supa_liquid/core/models/assets/assets.dart';
 import 'package:supa_liquid/core/util/extensions/extensions.dart';
+import 'package:supa_liquid/features/assets/data/assets_repository.dart';
 
 import '../../../../core/models/value_object/value_object.dart';
-import '../../../../core/repository.dart';
 import '../../../../core/widgets/common_loading.dart';
 import '../../../../core/widgets/form/domain/input.dart';
 import '../../../../core/widgets/form/view/form_modal/short_form_modal.dart';
@@ -31,14 +31,20 @@ class Depots extends StatelessWidget {
                     Input.address(Address.empty(), labelText: labels.address),
                   ],
                   submitHook: (inputs) async {
-                    await sl<Repository>().create(
-                      Entities.asset,
-                      Depot(
-                        id: '',
-                        name: inputs[0].value as VString,
-                        address: inputs[1].value as Address,
-                      ),
+                    await sl<AssetsRepository>().createDepot(
+                      (inputs.first.value as VString).getOrCrash,
                     );
+                    // await sl<AssetsRepository>().createDepot(
+                    //   (inputs.first.value as VString).getOrCrash,
+                    // );
+                    // await sl<Repository>().create(
+                    //   Entities.asset,
+                    //   Depot(
+                    //     id: '',
+                    //     name: inputs[0].value as VString,
+                    //     address: inputs[1].value as Address,
+                    //   ),
+                    // );
                   },
                 ).show();
               },
@@ -60,7 +66,7 @@ class _Depots extends StatelessWidget {
   Widget build(BuildContext context) {
     final labels = context.localizationLabels;
     return StreamBuilder<List<Asset>>(
-      stream: sl<Repository>().list(Entities.asset),
+      stream: Stream.value([]),
       builder: (context, snapshot) {
         return !snapshot.hasData
             ? const CommonLoading()
@@ -84,13 +90,14 @@ class _Depots extends StatelessWidget {
                           ),
                         ],
                         submitHook: (inputs) async {
-                          await sl<Repository>().edit(
-                            Entities.asset,
-                            depot.copyWith(
-                              name: inputs[0].value as VString,
-                              address: inputs[1].value as Address,
-                            ),
-                          );
+                          // await sl<AssetsRepository>().createDepot(depot);
+                          // await sl<Repository>().edit(
+                          //   Entities.asset,
+                          //   depot.copyWith(
+                          //     name: inputs[0].value as VString,
+                          //     address: inputs[1].value as Address,
+                          //   ),
+                          // );
                         },
                       ).show();
                     },

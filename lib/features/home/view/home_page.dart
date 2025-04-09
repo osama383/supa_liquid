@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
       auth,
       title: 'Home',
       selectedItem: NavItem.home,
-      body: const Placeholder(),
+      body: Center(child: Text(auth.company.name)),
     );
   }
 }

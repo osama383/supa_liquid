@@ -27,9 +27,9 @@ class Vehicle extends Asset with VehicleMappable {
 @MappableClass(discriminatorValue: 'depot')
 class Depot extends Asset with DepotMappable {
   final VString name;
-  final Address address;
+  // final Address address;
 
-  Depot({required super.id, required this.name, required this.address});
+  Depot({required super.id, required this.name});
 }
 
 @MappableClass(discriminatorValue: 'container')

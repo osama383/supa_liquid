@@ -15,6 +15,7 @@ import 'package:supabase_flutter/supabase_flutter.dart' as _i454;
 
 import 'core/repository.dart' as _i717;
 import 'core/spec/data/spec_repository.dart' as _i349;
+import 'features/assets/data/assets_repository.dart' as _i495;
 import 'features/auth/data/auth.dart' as _i201;
 import 'features/public/data/public_repository.dart' as _i545;
 import 'supa_module.dart' as _i737;
@@ -33,6 +34,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i201.Auth>(() => _i201.Auth(gh<_i454.Supabase>()));
     gh.singleton<_i545.PublicRepository>(
       () => _i545.PublicRepository(gh<_i454.Supabase>()),
+    );
+    gh.singleton<_i495.AssetsRepository>(
+      () => _i495.AssetsRepository(gh<_i454.Supabase>()),
     );
     return this;
   }

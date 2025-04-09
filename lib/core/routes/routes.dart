@@ -107,8 +107,16 @@ final goRouter = GoRouter(
     if (auth.userIsLoggedOut) {
       return state.matchedLocation == '/login' ? null : '/login';
     }
+    print('auth.userHasCompany');
+    print(auth.userHasCompany);
     if (auth.userHasCompany) {
-      return state.matchedLocation == '/login' ? '/' : null;
+      final s =
+          (state.matchedLocation == '/login' ||
+                  state.matchedLocation == 'create-company')
+              ? '/'
+              : null;
+      print(s);
+      return s;
     }
     return state.matchedLocation == '/login' ? '/create-company' : null;
   },

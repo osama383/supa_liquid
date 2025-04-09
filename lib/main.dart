@@ -36,10 +36,13 @@ void main() async {
   //ensure URL changes in the address bar when using push / pushNamed
   // more info here: https://docs.google.com/document/d/1VCuB85D5kYxPR3qYOjVmw8boAGKb7k62heFyfFHTOvw/edit
   // GoRouter.optionURLReflectsImperativeAPIs = true;
-  await sl<Auth>().started();
-  sl<Auth>().currentUserStream.distinct().listen((event) {
+  sl<Auth>().currentUserStream.listen((event) {
     goRouter.refresh();
   });
+  sl<Auth>().currentCompanyStream.listen((event) {
+    goRouter.refresh();
+  });
+  await sl<Auth>().started();
   await initializeTimeZone();
   runApp(const Supaliquid());
 }
