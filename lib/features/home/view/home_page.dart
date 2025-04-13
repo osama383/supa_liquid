@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart' hide FormState;
+import 'package:supa_liquid/core/auto_form/domain/form_input/form_input.dart';
+import 'package:supa_liquid/core/auto_form/domain/form_input/long_form_modal.dart';
+import 'package:supa_liquid/core/models/value_object/value_object.dart';
 import 'package:supa_liquid/core/scaffold/nav/nav.dart';
 
 import '../../../core/scaffold/view/base_scaffold.dart';
@@ -14,7 +17,27 @@ class HomePage extends StatelessWidget {
       auth,
       title: 'Home',
       selectedItem: NavItem.home,
-      body: Center(child: Text(auth.company.name)),
+      body: Center(
+        child: Column(
+          children: [
+            Text(auth.company.name),
+            FilledButton(
+              onPressed: () {
+                LongFormModal(
+                  theTitle: 'Title',
+                  inputs: [
+                    InputBuilder.vstring(VString.empty(), label: 'Name'),
+                  ],
+                  submitHook: (e) async {
+                    print(e);
+                  },
+                ).show();
+              },
+              child: Text('form'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

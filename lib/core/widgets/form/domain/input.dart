@@ -39,9 +39,9 @@ class Input<T extends Value> {
   Widget build(BuildContext context) {
     return switch (this) {
       Input<EmailAddress> e => EmailInput(e, labelText: labelText),
-      Input<VString> e => VStringInput(e, labelText: labelText),
+      // Input<VString> e => VStringInput(e, labelText: labelText),
       Input<Address> e => AddressInput(e, labelText: labelText),
-      Input<AlwaysValid<String>> e => TextInput(e, labelText: labelText),
+      // Input<AlwaysValid<String>> e => TextInput(e, labelText: labelText),
       Input<T>() => const Placeholder(),
     };
   }

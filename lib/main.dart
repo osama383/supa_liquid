@@ -51,7 +51,7 @@ void main() async {
   });
   // await sl<Auth>().started();
   await initializeTimeZone();
-  _funky();
+  // _funky();
   runApp(const Supaliquid());
 }
 
