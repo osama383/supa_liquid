@@ -1,27 +1,27 @@
 
-how can we achieve the dx shown in the example form?
+# how can we achieve the dx shown in the example form?
 
-we want the
- - ability to compose form from inputs
- - a submit hook that provides typesafe and covenient access to the inputs
+# we want the
+#  - ability to compose form from inputs
+#  - a submit hook that provides typesafe and covenient access to the inputs
 
-each input should be able to:
- - render a widget that allows the user to modify its value
- - update its values based on user input and actions
- - validate its value
+# each input should be able to:
+#  - render a widget that allows the user to modify its value
+#  - update its values based on user input and actions
+#  - validate its value
 
-the FormBloc is a pretty simple thing that has already been implemented
+# the FormBloc is a pretty simple thing that has already been implemented
 
-the overall process roughly looks like this:
- developer specifies the inputs and a submit hook
- a form modal is created
- a form bloc is created
- as the user performs actions:
-  - each input whose value has changed adds the OnInputEvent to the bloc
-     with its id and updated value
- when the user presses submit:
-  - the bloc asks each input if they are valid
-  - if each input is valid then the submit hook is trigerred
+# the overall process roughly looks like this:
+#  developer specifies the inputs and a submit hook
+#  a form modal is created
+#  a form bloc is created
+#  as the user performs actions:
+#   - each input whose value has changed adds the OnInputEvent to the bloc
+#      with its id and updated value
+#  when the user presses submit:
+#   - the bloc asks each input if they are valid
+#   - if each input is valid then the submit hook is trigerred
 
-AutoForm should not assume that we are using value objects
-but the DX should be easier if value objects areb being used
+# AutoForm should not assume that we are using value objects
+# but the DX should be easier if value objects areb being used

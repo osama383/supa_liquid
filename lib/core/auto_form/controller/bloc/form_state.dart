@@ -2,23 +2,23 @@ part of 'form_bloc.dart';
 
 @MappableClass()
 class FormState with FormStateMappable {
-  final List<FormValue> inputs;
+  final List<FormValue> values;
   final bool isEditing;
   final bool showErrors;
   final bool submissionInProgress;
   final Option<Either<Failure, Unit>> resultOption;
 
   FormState({
-    required this.inputs,
+    required this.values,
     required this.isEditing,
     required this.showErrors,
     required this.submissionInProgress,
     required this.resultOption,
   });
 
-  factory FormState.initial(List<FormValue> inputs, bool isEditing) {
+  factory FormState.initial(List<FormValue> values, bool isEditing) {
     return FormState(
-      inputs: inputs,
+      values: values,
       isEditing: isEditing,
       showErrors: false,
       submissionInProgress: false,
@@ -27,6 +27,6 @@ class FormState with FormStateMappable {
   }
 
   FormValue input(String id) {
-    return inputs.singleWhere((e) => e.id == id);
+    return values.singleWhere((e) => e.id == id);
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supa_liquid/core/auto_form/domain/form_input/form_value.dart';
 import 'package:supa_liquid/core/routes/routes.dart';
 import 'package:supa_liquid/core/util/extensions/extensions.dart';
@@ -18,7 +17,7 @@ class LongFormModal extends LongModal<FormBloc> {
     required this.inputs,
     required Future<void> Function(List<FormValue> inputs) submitHook,
   }) : _bloc = FormBloc(
-         inputs: inputs.map((e) => e.value).toList(),
+         values: inputs.map((e) => e.value).toList(),
          submitHook: submitHook,
        );
 
@@ -33,15 +32,6 @@ class LongFormModal extends LongModal<FormBloc> {
   @override
   Stream<bool> get isBusyStream =>
       bloc!.stream.map((e) => e.submissionInProgress);
-
-  // @override
-  // Widget primaryAction(BuildContext context) {
-  //   final labels = context.localizationLabels;
-  //   return FilledButton(
-  //     onPressed: () => context.read<FormBloc>().add(OnFormSubmitEvent()),
-  //     child: Text(labels.save),
-  //   );
-  // }
 
   @override
   LongModalConfigutation configure(BuildContext context) {

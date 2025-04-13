@@ -1,7 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
 
-import '../assets/assets.dart';
-
 part 'company.mapper.dart';
 
 @MappableClass()
